@@ -1,0 +1,36 @@
+namespace org.example.biznet
+
+asset Drug identified by drugId {
+  o String drugId
+  o String drugName
+  o String drugDescription
+  o String drugCompany
+  o String drugBatchNo
+  o Boolean forHandover
+  --> Owner owner
+}
+
+participant Owner identified by OwnerId {
+  o String OwnerId
+  o String OwnerName
+  o userType Type
+  o String Email regex=/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/ 
+  o String Password
+}
+
+transaction DrugHandover {
+  --> Drug drug
+  --> Owner newOwner
+}
+
+
+event HandoverNotification {
+  --> Drug drug
+}
+
+enum userType {
+  o Manufacturer
+  o Distributer
+  o Pharmacy
+  o Consumer
+}

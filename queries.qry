@@ -1,0 +1,32 @@
+/** Sample queries for Commodity Trading business network
+*/
+query getDrugAddedHistory {
+  description: "Select all Asset Adding History"
+  statement:
+      SELECT org.hyperledger.composer.system.HistorianRecord WHERE (transactionType == 'org.hyperledger.composer.system.AddAsset')
+}
+
+query getDrugHistory {
+  description: "Get Drug History"
+  statement:
+      SELECT org.example.biznet.DrugHandover WHERE (drug == _$drugID)
+}
+
+query getNewlyAddedDrug {
+  description: "Get Non Qr Code Drug"
+  statement:
+      SELECT org.example.biznet.Drug WHERE (owner == _$ownerId)
+}
+
+
+query Owner {
+  description: "Get Owner By Email"
+  statement:
+      SELECT org.example.biznet.Owner WHERE (Email == _$email)
+}
+
+query OwnerLogin {
+  description: "Login owner"
+  statement:
+      SELECT org.example.biznet.Owner WHERE (Email == _$email AND Password==_$password)
+}
